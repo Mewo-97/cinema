@@ -36,26 +36,74 @@ public class Login {
     public void fillLogin() {
         File u = new File("Book_ticket/core_and_data/users.txt");
         StringTokenizer st;
-        try {
-            Scanner sc = new Scanner(u);
+        try (Scanner sc = new Scanner(u)) {
             while (sc.hasNextLine()) {
                 st = new StringTokenizer(sc.nextLine(), " : ");
                 list.add(st.nextToken(), st.nextToken());
             }
             list.printlist();
-            sc.close();
         } catch (FileNotFoundException e) {
-            e.getMessage();
+            System.err.println("users.txt not found: " + e.getMessage());
         }
     }
     public boolean checkLogin(String n, String p) {
         node temp = list.head;
         while (temp != null) {
-            if (temp.username==n && temp.password==p) {
+            if (temp.username.equals(n) && temp.password.equals(p)) {
                 return true;
             }
             temp = temp.next;
         }
         return false;
     }
+    public void login(){
+        Scanner sc=new Scanner(System.in);
+        while(true){
+        System.out.println("Enter username:");
+        String n=sc.nextLine();
+        System.out.println("Enter password:");
+        String p=sc.nextLine();
+        if(checkLogin(n,p)){
+            System.out.println("welcome back "+n);
+            sc.close();
+            break;
+        }
+        else{
+            System.out.println("Invalid username or password. Please try again.");
+            
+        }
+    }}
+    public void create_account(){
+        Scanner sc = new Scanner(System.in);
+        String n;
+        while (true) {
+            System.out.println("Enter username:");
+            n = sc.nextLine().trim();
+            if (n.isEmpty()) {
+                System.out.println("Username cannot be empty.");
+                continue;
+            }
+            boolean valid = true;
+            for (int i = 0; i < n.length(); i++) {
+                if (!Character.isLetter(n.charAt(i))) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (!valid) {
+                System.out.println("Username must contain only letters.");
+                continue;
+            }
+            break;
+        }
+        System.out.println("Enter password:");
+        String p = sc.nextLine().trim();
+        try {
+            FileWriter fw = new FileWriter("Book_ticket/core_and_data/users.txt", true);
+            fw.write(n + " : " + p + "\n");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

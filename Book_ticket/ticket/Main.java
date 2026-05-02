@@ -1,30 +1,5 @@
 import java.util.*;
 
-class SeatMap {
-    boolean[][] seats;
-
-    public SeatMap(int rows, int columns) {
-        seats = new boolean[rows][columns];
-    }
-    // It ensures the row and column exist in the seat map
-    public boolean isValidSeat(int row, int col) {
-        return (row >= 0 && row < seats.length && col >= 0 && col < seats[0].length);
-    }
-    
-    public boolean bookSeat(int row, int col) {
-        if (!isValidSeat(row, col)) return false;
-        if (seats[row][col]) return false; 
-        seats[row][col] = true;
-        return true;
-    }
-
-    public void cancelSeat(int row, int col) {
-        if (isValidSeat(row, col)) {
-            seats[row][col] = false;
-        }
-    }
-}
-
 class MovieShow {
     String title;
     String time;

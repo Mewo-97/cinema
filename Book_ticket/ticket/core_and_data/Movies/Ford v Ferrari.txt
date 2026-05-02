@@ -1,0 +1,17 @@
+02:40:12
+20:10
+g20
+5x5
+O O O O O 
+O O O O O 
+O O O O O 
+O O O O O 
+O O O O O
+14:30
+g12
+5x5
+O O O O O 
+O O O O O 
+O O O O O 
+O O O O O 
+O O O O O

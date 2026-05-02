@@ -1,5 +1,4 @@
 package core_and_data;
-
 import java.util.*;
 import java.io.*;
 class node {
@@ -98,12 +97,14 @@ public class Login {
         }
         System.out.println("Enter password:");
         String p = sc.nextLine().trim();
+        sc.close();
         try {
             FileWriter fw = new FileWriter("Book_ticket/core_and_data/users.txt", true);
             fw.write(n + " : " + p + "\n");
+            fw.close();
+            list.add(n, p);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
 }

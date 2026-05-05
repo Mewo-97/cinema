@@ -47,7 +47,7 @@ public class Login {
     public boolean checkLogin(String n, String p) {
         node temp = list.head;
         while (temp != null) {
-            if (temp.username.equals(n) && temp.password.equals(p)) {
+            if (temp.username.toLowerCase().equals(n.toLowerCase()) && temp.password.equals(p)) {
                 return true;
             }
             temp = temp.next;
@@ -57,7 +57,8 @@ public class Login {
     public boolean checkLogin(String n){
         node temp = list.head;
         while (temp != null) {
-            if (temp.username.equals(n) ) {
+            if (temp.username.toLowerCase().equals(n.toLowerCase()) ) {
+                System.out.println("Username ("+temp.username+ ") exist");
                 return true;
             }
             temp = temp.next;
@@ -84,10 +85,8 @@ public class Login {
         String n;
         try{
             String x=sc.nextLine();
-
-
         }
-        catch(){
+        catch(Exception e){
             System.out.println(e.getMessage());
         }
         while (true) {
@@ -98,7 +97,6 @@ public class Login {
                 continue;
             }
             else if (checkLogin(n)) {
-                System.out.println("Username already exists. Please choose a different username.");
                 continue;
             }
             boolean valid = true;

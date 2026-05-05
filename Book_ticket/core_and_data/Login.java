@@ -40,7 +40,6 @@ public class Login {
                 st = new StringTokenizer(sc.nextLine(), " : ");
                 list.add(st.nextToken(), st.nextToken());
             }
-            list.printlist();
         } catch (FileNotFoundException e) {
             System.err.println("users.txt not found: " + e.getMessage());
         }
@@ -55,8 +54,18 @@ public class Login {
         }
         return false;
     }
-    public void login(){
-        Scanner sc=new Scanner(System.in);
+    public boolean checkLogin(String n){
+        node temp = list.head;
+        while (temp != null) {
+            if (temp.username.equals(n) ) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+    public void login(Scanner sc){
+        
         while(true){
         System.out.println("Enter username:");
         String n=sc.nextLine();
@@ -64,7 +73,6 @@ public class Login {
         String p=sc.nextLine();
         if(checkLogin(n,p)){
             System.out.println("welcome back "+n);
-            sc.close();
             break;
         }
         else{
@@ -72,14 +80,25 @@ public class Login {
             
         }
     }}
-    public void create_account(){
-        Scanner sc = new Scanner(System.in);
+    public void create_account(Scanner sc){
         String n;
+        try{
+            String x=sc.nextLine();
+
+
+        }
+        catch(){
+            System.out.println(e.getMessage());
+        }
         while (true) {
             System.out.println("Enter username:");
             n = sc.nextLine().trim();
-            if (n.isEmpty()) {
+            if (n.isEmpty() ) {
                 System.out.println("Username cannot be empty.");
+                continue;
+            }
+            else if (checkLogin(n)) {
+                System.out.println("Username already exists. Please choose a different username.");
                 continue;
             }
             boolean valid = true;
@@ -97,7 +116,6 @@ public class Login {
         }
         System.out.println("Enter password:");
         String p = sc.nextLine().trim();
-        sc.close();
         try {
             FileWriter fw = new FileWriter("Book_ticket/core_and_data/users.txt", true);
             fw.write(n + " : " + p + "\n");
